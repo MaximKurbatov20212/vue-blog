@@ -1,0 +1,27 @@
+{
+  "welcome": "Welcome",
+  "auth": "Register",
+  "user" : {
+    "login" : "Login",
+    "password" : "Password",
+    "name" : "Name",
+    "surname" : "Surname",
+    "phone" : "Phone"
+  },
+
+  "user_form" : {
+    "main_info": "Main info",
+    "about_me": "About me",
+    "tags": "Tags",
+    "links" : "Links",
+    "age" : "Age",
+    "city" : "City",
+    "education" : "Education",
+    "placeholder" : "Input data"
+  },
+  "followers" : "0 followers | 1 follower | {count} followers",
+  "input_error": "Incorrect",
+  "sort": "Sort by:",
+  "by_date": "date",
+  "by_title": "title"
+}
