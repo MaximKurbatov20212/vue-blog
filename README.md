@@ -20,4 +20,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### demo
 
-![](https://github.com/MaximKurbatov20212/demo/blog-demo.gif)
+![](https://github.com/MaximKurbatov20212/vue-blog/blob/master/demo/blog-demo.gif)
