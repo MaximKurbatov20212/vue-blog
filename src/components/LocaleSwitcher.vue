@@ -1,9 +1,11 @@
 <template>
-  <ul class="locale-switch">
-    <li v-for="locale in locales" :key="locale" @click="switchLocale(locale)">
-      {{ locale }}
-    </li>
-  </ul>
+  <div class="switcher" :class="modifier">
+    <ul class="locale-switch">
+      <li v-for="locale in locales" :key="locale" @click="switchLocale(locale)">
+        {{ locale }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -20,6 +22,12 @@ export default {
     }
   },
 
+  props : {
+    modifier: {
+      type: String
+    }
+  },
+
   data() {
     return {
       locales : process.env.VUE_APP_I18N_SUPPORTED_LOCALE.split(',')
@@ -31,6 +39,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/vars";
+
+.switcher {
+  display: flex;
+}
 
 .locale-switch {
   display: flex;

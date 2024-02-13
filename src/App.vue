@@ -46,6 +46,10 @@ body {
   line-height: 18px;
 }
 
+.right {
+  justify-content: flex-end;
+}
+
 @media (max-width: 991px) {
   .title-1 {
     font-size: 26px;

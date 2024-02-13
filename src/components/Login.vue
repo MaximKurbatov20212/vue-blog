@@ -6,27 +6,27 @@
       <form  class="login__form">
         <div class="login__form-items">
           <UserDataInput
-              :model-value="$store.state.login"
+              :model-value="login"
+              @update:model-value="setLogin($event.target.value)"
               :label="$t('user.login')"
-              @update:model-value="$store.commit('setLogin', $event.target.value)"
           />
           <UserDataInput
-              :model-value="$store.state.password"
+              :model-value="password"
+              @update:model-value="setPassword($event.target.value)"
               :label="$t('user.password')"
               :type="'password'"
-              @update:model-value="$store.commit('setPassword', $event.target.value)"
           />
           <UserDataInput
-              :model-value="$store.state.name"
+              :model-value="name"
+              @update:model-value="setName($event.target.value)"
               :label="$t('user.name')"
-              @update:model-value="$store.commit('setName', $event.target.value)"
           />
           <UserDataInput
-              :model-value="$store.state.phone"
+              :model-value="phone"
+              @update:model-value="setPhone($event.target.value)"
               :label="$t('user.phone')"
               :type="'tel'"
               :mask="['+7 (###) ##-##-##', '8 (###) ##-##-##']"
-              @update:model-value="$store.commit('setPhone', $event.target.value)"
           />
         </div>
 
@@ -42,12 +42,29 @@
 <script >
 import UserDataInput from "@/components/UI/UserDataInput";
 import {Form} from "vee-validate";
+import {mapState, mapMutations} from "vuex"
 
 export default {
-
   name: "Login",
   components: { UserDataInput, Form },
 
+  computed: {
+    ...mapState({
+      login : state => state.user.login,
+      password: state => state.user.password,
+      name: state => state.user.name,
+      phone: state => state.user.phone,
+    })
+  },
+
+  methods : {
+    ...mapMutations({
+      setLogin : 'user/setLogin',
+      setPassword: "user/setPassword",
+      setPhone: "user/setPhone",
+      setName: "user/setName"
+    })
+  }
 }
 </script>
 

@@ -3,7 +3,9 @@
     <label class="radio__label">
       <input
           class="radio__input"
+
           :name="name"
+
           type="radio"
           @click="handleClick"
           :value="alias"
@@ -36,7 +38,7 @@ export default {
 
   methods : {
     handleClick() {
-      // console.log(this.alias)
+      console.log(this.alias)
       this.$emit("update:option", this.alias)
     }
   }

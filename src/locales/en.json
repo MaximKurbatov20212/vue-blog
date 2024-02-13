@@ -23,5 +23,9 @@
   "input_error": "Incorrect",
   "sort": "Sort by:",
   "by_date": "date",
-  "by_title": "title"
+  "by_title": "title",
+  "post" : {
+    "edit" : "Edit",
+    "preview" : "Preview"
+  }
 }

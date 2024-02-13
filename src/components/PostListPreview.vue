@@ -3,10 +3,10 @@
 
     <div class="post-list">
       <PostSelector class="selector-wrapper"/>
-        <transition-group name="flip-list" tag="div" class="ag-courses_box">
-<!--          <div class="ag-courses_box">-->
-            <PostPreview v-for="post in $store.getters.sortPosts" :key="post.id" :post="post"/>
-<!--          </div>-->
+      <transition-group name="flip-list" tag="div" class="ag-courses_box">
+        <!--          <div class="ag-courses_box">-->
+        <PostPreview v-for="post in sortPosts" :key="post.id" :post="post"/>
+        <!--          </div>-->
       </transition-group>
 
     </div>
@@ -16,11 +16,19 @@
 <script>
 
 import PostPreview from "@/components/UI/PostPreview";
+import {mapGetters} from "vuex";
+
 export default {
   name: "PostListPreview",
   components: {PostPreview},
 
+  computed : {
+    ...mapGetters({
+      sortPosts : 'post/sortPosts',
+    })
+  }
 }
+
 </script>
 <style scoped>
 

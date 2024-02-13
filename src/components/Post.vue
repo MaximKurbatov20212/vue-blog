@@ -1,40 +1,40 @@
 <template>
-  <div class="container">
-    <div class="post post--mg">
+  <div class="post post--mg">
 
-      <div class="post__header">
-        <div class="post__header-row">
-          <h2 class="post__main-title">{{post?.title}}</h2>
-          <h3 class="post__title-1">{{$d(post.date, 'short')}}</h3>
-        </div>
+    <div class="post__header">
+      <div class="post__header-row">
+        <h2 class="post__main-title">{{post?.title}}</h2>
+        <h3 class="post__title-1">{{$d(post.date, 'short')}}</h3>
+      </div>
+    </div>
+
+    <div class="post__main">
+
+      <div class="post__toogler">
+
+        <RadioButton :alias="'Edit'" v-model:option="option" :name="post?.title" />
+        <RadioButton :alias="'Preview'"  v-model:option="option" :name="post?.title"/>
+
+        <RadioButton :isNone="isNone" :name="post?.title" />
       </div>
 
-      <div class="post__main">
-
-        <div class="post__toogler">
-          <RadioButton :alias="'Preview'" v-model:option="option" :name="post?.title" />
-          <RadioButton :alias="'Write'"  v-model:option="option" :name="post?.title"/>
-          <RadioButton :isNone="isNone" :name="post?.title" />
-        </div>
-
-        <textarea
-            v-if="option === 'Write'"
-            class="post__data"
-            :value="post?.content"
-            @input="handler"
-            placeholder="Пишите в формате .md"
-        >
+      <textarea
+          v-if="option === 'Edit'"
+          class="post__data"
+          :value="post?.content"
+          @input="handler"
+          placeholder="Пишите в формате .md"
+      >
         </textarea>
 
-        <MarkDownField v-else :modelValue="post.content"/>
+      <MarkDownField v-else :modelValue="post.content"/>
 
-        <div class="post__footer">
-          <div class="post__footer-row">
-            <h3 class="post__title-1">Пожаловаться</h3>
+      <div class="post__footer">
+        <div class="post__footer-row">
+          <h3 class="post__title-1">Пожаловаться</h3>
 
-            <div class="post__footer-like">
-              <img class="post__footer-like-img" src="../img/like.svg" alt="like">
-            </div>
+          <div class="post__footer-like">
+            <img class="post__footer-like-img" src="../img/like.svg" alt="like">
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
 import MarkDownField from "@/components/MarkDownField";
 import Input from "@/components/UI/Input";
 import RadioButton from "@/components/UI/RadioButton";
-import PostMixin from "@/mixins/PostMixin";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "Post",
@@ -63,10 +63,13 @@ export default {
       option: "Write"
     }
   },
-
   computed: {
+    ...mapGetters({
+      sortPosts : 'post/sortPosts',
+    }),
+
     post() {
-      for (const p of this.$store.getters.sortPosts) {
+      for (const p of this.sortPosts) {
         if (p.id === this.$route.params.id) {
           return p;
         }
@@ -82,14 +85,16 @@ export default {
   // },
 
   methods : {
+    ...mapMutations({
+      setPost: "post/setPost"
+    }),
+
     handleClick(e) {
-      this.option = e.target.value === "Write" ? "Write" : "Preview";
+      this.option = e.target.value ===  "Edit" ? "Edit" : "Preview";
     },
+
     handler(e) {
-      this.$store.commit(
-          'setPost',
-          {id : this.$route.params.id, title: this.post.title, date: this.post.date, content : e.target.value}
-      );
+      this.setPost({id : this.$route.params.id, title: this.post.title, date: this.post.date, content : e.target.value});
     }
   }
 }

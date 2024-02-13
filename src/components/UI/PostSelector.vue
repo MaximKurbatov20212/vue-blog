@@ -2,9 +2,9 @@
 
   <div class="selector-wrapper selector--right">
     <label for="post-selector">{{$t('sort')}}</label>
-    <select id="post-selector" name="selector" class="selector" @change="$store.commit('setSelectedSort', $event.target.value)">
+    <select id="post-selector" name="selector" class="selector" @change="setSelectedSort($event.target.value)">
       <option
-          v-for="option in $store.state.sortOptions"
+          v-for="option in sortOptions"
           :key="option.value"
           :value="option.value"
       >
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import {mapMutations, mapState} from "vuex";
+
 export default {
   name: "PostSelector",
   
@@ -23,13 +25,18 @@ export default {
     return {
 
     }
+  },
+  computed: {
+    ...mapState({
+      sortOptions: state => state.post.sortOptions,
+    }),
+
+  },
+  methods : {
+    ...mapMutations({
+      setSelectedSort: "post/setSelectedSort"
+    })
   }
-  ,
-  // methods : {
-  //   handle(event) {
-  //     console.log(event.target.value);
-  //   }
-  // }
 }
 
 </script>

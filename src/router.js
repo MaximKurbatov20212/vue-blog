@@ -1,6 +1,6 @@
 import MainPage from "@/pages/MainPage";
 import LoginPage from "@/pages/LoginPage";
-import Post from "@/components/Post";
+import PostPage from "@/pages/PostPage";
 
 const {createRouter, createWebHistory} = require("vue-router/dist/vue-router");
 
@@ -16,7 +16,7 @@ const routes = [
     {
         path: '/post/:id',
         name: 'post',
-        component: Post
+        component: PostPage
     },
     {
         path: '/:pathMatch(.*)*',

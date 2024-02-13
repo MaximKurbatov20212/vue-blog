@@ -9,7 +9,7 @@
         </div>
 
         <div class="user__main-info-footer">
-          <h2 class="user__name">{{$store.state.name}}</h2>
+          <h2 class="user__name">{{name}}</h2>
           <h3 class="title-3">Java developmer</h3>
           <h3 class="title-3">{{ $tc('followers', 2022) }}</h3>
         </div>
@@ -24,11 +24,17 @@
 <script>
 import Swiper from "@/components/Swiper";
 import UserForm from "@/components/UserForm";
+import {mapState} from "vuex";
 
 export default {
   name: "User",
   components : {
     Swiper, UserForm
+  },
+  computed: {
+    ...mapState({
+      name: state => state.user.name
+    })
   },
 
   data() {
